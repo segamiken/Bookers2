@@ -3,6 +3,7 @@
 
 <div class="col-lg-3">
 	<h1>User info</h1>
+	<%= attachment_image_tag current_user, :profile_image,　format: 'jpeg', size: "100x100" %>
 <table class="table table-striped">
 	<tr>
 		<th>name</th>
@@ -10,8 +11,11 @@
 	</tr>
 	<tr>
 		<th>introduction</th>
+		<th><%= current_user.introduction %></th>
 	</tr>
 </table>
+
+<%= link_to "プロフィール編集", edit_user_path(current_user) %>
 
 
 <h1>New Book</h1>
@@ -38,7 +42,7 @@
 
 <% @users.each do |user| %>
 		<tr>
-			<th></th>
+			<th><%= attachment_image_tag user, :profile_image,　format: 'jpeg', size: "40x40" %></th>
 			<th><%= user.name %></th>
 			<th><%=link_to "Show", user_path(user.id) %></th>
 		</tr>

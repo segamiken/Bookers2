@@ -4,8 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+   def email_required?
+   	  false
+   end
+
+   def email_changed?
+      false
+   end
+
+   validates :name, length: {minimum: 2, maximum: 20}
+
+   validates :introduction, length: {maximum: 50}
 
   has_many :books, dependent: :destroy
 
   attachment :profile_image
+
 end

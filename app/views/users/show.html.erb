@@ -1,12 +1,18 @@
+<% if flash[:notice] %>
+	<div class="flash">
+     	<%= flash[:notice] %>
+    </div>
+<% end %>
+
+
 <div class="container">
 <div class="row">
 
 <div class="col-lg-3">
 	<h1>User info</h1>
-	<th><%= @user.profile_image %></th>
+	<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', size: "100x100" %>
 
 <table class="table table-striped">
-	
 	<tr>
 		<th>name</th>
 		<th><%= @user.name %></th>
@@ -18,8 +24,11 @@
 	</tr>
 </table>
 
+<% if @user == current_user %>
 <%= link_to "プロフィール編集", edit_user_path(@user) %>
-
+<% else %>
+<%= link_to "プロフィール編集", user_path(current_user.id) %>
+<% end %>
 
 
 <h1>New Book</h1>

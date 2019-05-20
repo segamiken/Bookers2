@@ -1,9 +1,10 @@
-
 <div class="container">
 <div class="row">
 
 <div class="col-lg-3">
 	<h1>User info</h1>
+	<%= attachment_image_tag current_user, :profile_image,　format: 'jpeg', size: "100x100" %>
+
 <table class="table table-striped">
 	<tr>
 		<th>name</th>
@@ -11,12 +12,15 @@
 	</tr>
 	<tr>
 		<th>introduction</th>
+		<th><%= current_user.introduction %></th>
 	</tr>
 </table>
+<%= link_to "プロフィール編集", edit_user_path(current_user) %>
 
 
 <h1>New Book</h1>
 	<%= form_for(@book) do |f| %>
+
 <h4>Title</h4>
 	<%=f.text_field :title %>
 <h4>Opinion</h4>
@@ -36,8 +40,11 @@
 		<tr>
 			<th><%= @books.title %></th>
 			<th><%= @books.body %></th>
+
+			<% if @books.user.id == current_user.id %>
 			<th><%=link_to "Edit", edit_book_path(@books.id), class: "btn btn-success btn-xs" %></th>
 			<th><%=link_to "Destroy", book_path(@books.id), method: :delete, 'data-confirm' => "本当に削除しますか？", class: "btn btn-danger btn-xs" %></th>
+			<% end %>
 		</tr>
 	</table>
 </div>
