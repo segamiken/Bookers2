@@ -2,12 +2,14 @@
    <h2>error</h2>
 <% end %>
 
+<%= render 'layouts/flash_messages' %>
+
 <div class="container">
 <div class="row">
 
 <div class="col-lg-3">
 	<h1>User info</h1>
-	<%= attachment_image_tag current_user, :profile_image,　format: 'jpeg', size: "100x100" %>
+	<%= attachment_image_tag current_user, :profile_image,　format: 'jpeg', size: "100x100", fallback: "img/no_image.jpg" %>
 
 <table class="table table-striped">
 	<tr>
@@ -45,14 +47,16 @@
 		<tr>
 			<th>投稿者</th>
 			<th>Title</th>
-			<th>Opinion</th>
 		</tr>
 
 <% @books.each do |book| %>
 		<tr>
-			<th><%= attachment_image_tag book.user, :profile_image,　format: 'jpeg', size: "40x40" %></th>
+			<th>
+				<%=link_to user_path(book.user) do %>
+					<%= attachment_image_tag book.user, :profile_image,　format: 'jpeg', size: "40x40", fallback: "img/no_image.jpg" %>
+				<% end %>
+			</th>
 			<th><%=link_to book.title, book_path(book.id) %></th>
-			<th><%= book.body %></th>
 		</tr>
 <% end %>
 	</table>

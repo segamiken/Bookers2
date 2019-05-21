@@ -10,7 +10,8 @@
 
 <div class="col-lg-3">
 	<h1>User info</h1>
-	<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', size: "100x100" %>
+
+	<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', size: "100x100", fallback: "img/no_image.jpg" %>
 
 <table class="table table-striped">
 	<tr>
@@ -50,12 +51,14 @@
 	<h1>Books</h1>
 	<table class="table">
 		<tr>
+			<th></th>
 			<th>Title</th>
 			<th>Opiniton</th>
 		</tr>
 
 <% @books.each do |book| %>
 		<tr>
+			<th><%= attachment_image_tag book.user, :profile_image,　format: 'jpeg', size: "40x40" %></th>
 			<th><%=link_to book.title, book_path(book.id) %></th>
 			<th><%= book.body %></th>
 		</tr>

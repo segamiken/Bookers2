@@ -1,21 +1,32 @@
+<% if flash[:notice] %>
+	<div class="flash">
+     	<%= flash[:notice] %>
+    </div>
+<% end %>
+
 <div class="container">
 <div class="row">
 
 <div class="col-lg-3">
 	<h1>User info</h1>
-	<%= attachment_image_tag current_user, :profile_image,　format: 'jpeg', size: "100x100" %>
+	<%= attachment_image_tag @books.user, :profile_image,　format: 'jpeg', size: "100x100", fallback: "img/no_image.jpg" %>
 
 <table class="table table-striped">
 	<tr>
 		<th>name</th>
-		<th><%= current_user.name %></th>
+		<th><%= @books.user.name %></th>
 	</tr>
 	<tr>
 		<th>introduction</th>
-		<th><%= current_user.introduction %></th>
+		<th><%= @books.user.introduction %></th>
 	</tr>
 </table>
-<%= link_to "プロフィール編集", edit_user_path(current_user) %>
+
+<% if @books.user == current_user %>
+<%= link_to "プロフィール編集", edit_user_path(@books.user) %>
+<% else %>
+<%= link_to "プロフィール編集", user_path(current_user.id) %>
+<% end %>
 
 
 <h1>New Book</h1>
@@ -38,6 +49,10 @@
 	<h1>Book detail</h1>
 	<table class="table">
 		<tr>
+			<th>
+				<%= attachment_image_tag @books.user, :profile_image,　format: 'jpeg', size: "100x100" %>
+				<%=link_to @books.user.name, user_path(@books.user.id) %>
+			</th>
 			<th><%= @books.title %></th>
 			<th><%= @books.body %></th>
 
