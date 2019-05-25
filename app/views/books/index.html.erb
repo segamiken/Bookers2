@@ -47,6 +47,7 @@
 		<tr>
 			<th>投稿者</th>
 			<th>Title</th>
+			<th>opinion</th>
 		</tr>
 
 <% @books.each do |book| %>
@@ -57,6 +58,7 @@
 				<% end %>
 			</th>
 			<th><%=link_to book.title, book_path(book.id) %></th>
+			<th><%= book.body %></th>
 		</tr>
 <% end %>
 	</table>
