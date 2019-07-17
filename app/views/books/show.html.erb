@@ -20,6 +20,19 @@
 		<th>introduction</th>
 		<th><%= @books.user.introduction %></th>
 	</tr>
+
+	<tr>
+		<th>
+			<i class="fas fa-male fa-2x"></i>
+			<%= link_to "#{@books.user.followings.count}  Following", follows_user_path(@books.user.id) %>
+		</th>
+	</tr>
+	<tr>
+		<th>
+			<i class="fas fa-male fa-2x"></i>
+			<%= link_to "#{@books.user.followers.count} Followers", followers_user_path(@books.user.id) %>
+		</th>
+	</tr>
 </table>
 
 <% if @books.user == current_user %>
@@ -61,7 +74,65 @@
 			<th><%=link_to "Destroy", book_path(@books.id), method: :delete, 'data-confirm' => "本当に削除しますか？", class: "btn btn-danger btn-xs" %></th>
 			<% end %>
 		</tr>
+
+		<% if @books.favorited_by?(current_user) %>
+		<tr>
+			<th>
+				<%= link_to book_favorites_path(@books.id), method: :delete do %>
+      			<i class="fa fa-thumbs-up fa-3x" style="color: blue;"></i>
+      			<%= @books.favorites.count %> いいね
+      			<% end %>
+			</th>
+		</tr>
+		<% else %>
+		<tr>
+			<th>
+				<%= link_to book_favorites_path(@books.id), method: :post do %>
+      			<i class="fa fa-thumbs-up fa-3x" style="color: black;"></i>
+      			<%= @books.favorites.count %>いいね
+      			<% end %>
+			</th>
+		</tr>
+		<% end %>
+
+		<tr><th>いいねをしているユーザー</th></tr>
+		<% @books.favorites.each do |u| %>
+		<tr>
+			<th>
+			<%= attachment_image_tag u.user, :profile_image,　format: 'jpeg', size: "30x30",fallback: "img/no_image.jpg"  %>
+			<%= u.user.name %>
+			</th>
+		</tr>
+		<% end %>
 	</table>
+
+	<h3>Book comment</h3>
+	<table class="table">
+		<% @books.post_comments.each do |c| %>
+		<tr>
+			<th><%= c.user.name %></th>
+			<th><%= c.comment%></th>
+
+			<th>
+				<% if c.user_id == current_user.id %>
+
+				<%=link_to "コメント編集", edit_book_post_comment_path(@books.id, c.id), class: "btn btn-primary btn-xs" %>
+
+				<%=link_to "コメント削除", book_post_comment_path(@books.id, c.id), method: :delete, 'data-confirm' => "ほんまに？", class: "btn btn-danger btn-xs" %>
+
+				<% end %>
+			</th>
+		</tr>
+		<% end %>
+	</table>
+
+		<div>
+			<%= form_for [@books, @post_comment] do |f| %>
+            <%= f.text_area :comment,placeholder: "コメントをここに"%>
+    		<%= f.submit "送信する", class: "btn btn-m btn-base-1 mt-20" %>
+			<% end %>
+		</div>
+
 </div>
 
 </div>

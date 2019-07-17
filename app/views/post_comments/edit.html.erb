@@ -1,0 +1,10 @@
+<section>
+	<h1>コメントの編集</h1>
+	<%= form_for(@comment, :url => book_post_comment_path) do |c| %>
+
+	<h4>コメントを編集してください。</h4>
+	<%= c.text_area :comment %>
+
+	<%= c.submit 'Update Comment', class:"btn btn-primary" %>
+	<% end %>
+</section>

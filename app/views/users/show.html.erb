@@ -23,14 +23,32 @@
 		<th>introduction</th>
 		<th><%= @user.introduction %></th>
 	</tr>
+
+	<tr>
+		<th>
+			<i class="fas fa-male fa-2x"></i>
+			<%= link_to "#{@user.followings.count}  Following", follows_user_path %>
+		</th>
+	</tr>
+	<tr>
+		<th>
+			<i class="fas fa-male fa-2x"></i>
+			<%= link_to "#{@user.followers.count} Followers", followers_user_path %>
+		</th>
+	</tr>
 </table>
 
 <% if @user == current_user %>
 <%= link_to "プロフィール編集", edit_user_path(@user) %>
-<% else %>
-<%= link_to "プロフィール編集", user_path(current_user.id) %>
 <% end %>
 
+<% if current_user != @user %>
+	<% if @user.followed_by?(current_user) %>
+        <p><%=link_to "フォロー済み", user_relationships_path(@user.id), method: :delete, class: "btn btn-success" %></p>
+    <% else %>
+        <p><%=link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-primary" %></p>
+    <% end %>
+<% end %>
 
 <h1>New Book</h1>
 	<%= form_for(@book) do |f| %>

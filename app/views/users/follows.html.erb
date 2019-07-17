@@ -13,47 +13,23 @@
 		<th>introduction</th>
 		<th><%= current_user.introduction %></th>
 	</tr>
-
-	<tr>
-		<th>
-			<i class="fas fa-male fa-2x"></i>
-			<%= link_to "#{current_user.followings.count}  Following", follows_user_path(current_user.id) %>
-		</th>
-	</tr>
-	<tr>
-		<th>
-			<i class="fas fa-male fa-2x"></i>
-			<%= link_to "#{current_user.followers.count} Followers", followers_user_path(current_user.id) %>
-		</th>
-	</tr>
 </table>
 
 <%= link_to "プロフィール編集", edit_user_path(current_user) %>
-
-
-<h1>New Book</h1>
-	<%= form_for(@book) do |f| %>
-<h4>Title</h4>
-	<%=f.text_field :title %>
-<h4>Opinion</h4>
-	<%=f.text_area :body %> <br>
-
-	<%=f.submit 'Create Book', class:"btn btn-primary" %>
-	<% end %>
 
 </div>
 
 
 
 <div class="col-lg-9">
-	<h1>Users</h1>
+	<h1><%= "#{@user.name}がフォローしている人たち" %></h1>
 	<table class="table">
 		<tr>
 			<th>image</th>
 			<th>name</th>
 		</tr>
 
-<% @users.each do |user| %>
+<% @user.followings.each do |user| %>
 		<tr>
 			<th><%= attachment_image_tag user, :profile_image,　format: 'jpeg', size: "40x40", fallback: "img/no_image.jpg" %></th>
 			<th><%= user.name %></th>
@@ -77,3 +53,4 @@
 
 </div>
 </div>
+

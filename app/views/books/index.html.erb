@@ -20,6 +20,19 @@
 		<th>introduction</th>
 		<th><%= current_user.introduction %></th>
 	</tr>
+
+	<tr>
+		<th>
+			<i class="fas fa-male fa-2x"></i>
+			<%= link_to "#{current_user.followings.count}  Following", follows_user_path(current_user.id) %>
+		</th>
+	</tr>
+	<tr>
+		<th>
+			<i class="fas fa-male fa-2x"></i>
+			<%= link_to "#{current_user.followers.count} Followers", followers_user_path(current_user.id) %>
+		</th>
+	</tr>
 </table>
 
 <%= link_to "プロフィール編集", edit_user_path(current_user) %>
@@ -59,6 +72,10 @@
 			</th>
 			<th><%=link_to book.title, book_path(book.id) %></th>
 			<th><%= book.body %></th>
+			<th>
+				<i class="fa fa-thumbs-up fa-2x"></i>
+      			<%= book.favorites.count %>いいね
+			</th>
 		</tr>
 <% end %>
 	</table>
