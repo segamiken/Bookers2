@@ -3,7 +3,11 @@ class BooksController < ApplicationController
 
 	def index
 		@book = Book.new
-		@books = Book.all
+		@books = if params[:search]
+			Book.where('title LIKE?',"%#{params[:search]}%")
+			else
+			Book.all
+		end
 	end
 
 	def create
