@@ -16,6 +16,8 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+
 
 * {
   margin: 0;
@@ -30,6 +32,11 @@ header {
 	height: 100px;
 }
 
+.top_page {
+	width: 25%;
+	margin: 20px auto;
+}
+
 .container {
 	margin: 0 auto;
 }
@@ -39,4 +46,18 @@ header {
 	font-size: 32px;
 }
 
-@import "font-awesome";
+.image1 {
+	background-image: url("img/test1.jpg");
+}
+
+.image2 {
+	background-image: url("img/test2.jpg");
+}
+
+.image3 {
+	background-image: url("img/test3.jpg");
+}
+
+#container {
+	height: 500px;
+}
