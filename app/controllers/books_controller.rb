@@ -14,11 +14,14 @@ class BooksController < ApplicationController
 		@books = Book.all
 		@book = Book.new(book_params)
 		@book.user_id = current_user.id
+		respond_to do |format|
 		if @book.save
 			flash[:notice] = "Book was successfully added"
-			redirect_to book_path(@book.id)
+			format.json {render :json => @book}
+			format.html {redirect_to book_path(@book.id)}
 		else
-			render :index
+			format.html {redirect_to books_path}
+		end
 		end
 	end
 

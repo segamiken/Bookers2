@@ -44,4 +44,9 @@ $(document).ready(function() {
         // 一枚目のスライド表示時に戻る矢印を表示するかどうか(falseで非表示)
         hidePrevious : false
     });
+
+    $(document).on('ajax:success', 'form', function(e) {
+        $('textarea, #book_title').val('');
+        $('.book_index').prepend('<p>' + e.detail[0].title + e.detail[0].body + '</p>');
+    })
 });

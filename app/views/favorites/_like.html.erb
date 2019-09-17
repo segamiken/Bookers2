@@ -1,0 +1,19 @@
+<% if books.favorited_by?(current_user) %>
+
+	<%= link_to book_favorites_path(books.id), method: :delete, remote: true  do %>
+    	<i class="fa fa-thumbs-up fa-3x" style="color: blue;"></i>
+     	<%= books.favorites.count %> いいね
+    <% end %>
+
+<% else %>
+	<%= link_to book_favorites_path(books.id), method: :post, remote: true do %>
+      	<i class="fa fa-thumbs-up fa-3x" style="color: black;"></i>
+      	<%= books.favorites.count %>いいね
+    <% end %>
+<% end %>
+
+<p>いいねをしているユーザー</p>
+	<% books.favorites.each do |u| %>
+			<%= attachment_image_tag u.user, :profile_image,　format: 'jpeg', size: "30x30",fallback: "img/no_image.jpg"  %>
+			<%= u.user.name %>
+	<% end %>

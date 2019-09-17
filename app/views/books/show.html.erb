@@ -75,36 +75,10 @@
 			<% end %>
 		</tr>
 
-		<% if @books.favorited_by?(current_user) %>
-		<tr>
-			<th>
-				<%= link_to book_favorites_path(@books.id), method: :delete do %>
-      			<i class="fa fa-thumbs-up fa-3x" style="color: blue;"></i>
-      			<%= @books.favorites.count %> いいね
-      			<% end %>
-			</th>
-		</tr>
-		<% else %>
-		<tr>
-			<th>
-				<%= link_to book_favorites_path(@books.id), method: :post do %>
-      			<i class="fa fa-thumbs-up fa-3x" style="color: black;"></i>
-      			<%= @books.favorites.count %>いいね
-      			<% end %>
-			</th>
-		</tr>
-		<% end %>
-
-		<tr><th>いいねをしているユーザー</th></tr>
-		<% @books.favorites.each do |u| %>
-		<tr>
-			<th>
-			<%= attachment_image_tag u.user, :profile_image,　format: 'jpeg', size: "30x30",fallback: "img/no_image.jpg"  %>
-			<%= u.user.name %>
-			</th>
-		</tr>
-		<% end %>
 	</table>
+	<div id="favorite_area">
+		<%= render "favorites/like", books: @books %>
+	</div>
 
 	<h3>Book comment</h3>
 	<table class="table">
