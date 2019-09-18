@@ -10,8 +10,9 @@
 <div class="col-lg-3">
 
 	<div>
-		<p>本の検索</p>
+		<p>検索</p>
 		<%= form_tag(books_path, :method => 'get') do %>
+		<%= select_tag 'search_model', options_for_select({本: 1, ユーザー名: 2}, 1) %>
 		<%= text_field_tag :search %>
 		<%= submit_tag 'search' %>
 		<% end %>
