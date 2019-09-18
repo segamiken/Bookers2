@@ -10,11 +10,12 @@
 <div class="col-lg-3">
 
 	<div>
-		<p>検索</p>
+		<h3>検索</h3>
 		<%= form_tag(books_path, :method => 'get') do %>
-		<%= select_tag 'search_model', options_for_select({本: 1, ユーザー名: 2}, 1) %>
+		<%= select_tag 'search_model', options_for_select({本のタイトルで検索: 1, ユーザー名で検索: 2}) %>
+		<%= select_tag 'search_way', options_for_select({部分一致: 1, 前方一致: 2, 後方一致: 3, 完全一致: 4}) %>
 		<%= text_field_tag :search %>
-		<%= submit_tag 'search' %>
+		<%= submit_tag '検索' %>
 		<% end %>
 	</div>
 

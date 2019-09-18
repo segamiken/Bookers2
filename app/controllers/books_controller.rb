@@ -5,9 +5,9 @@ class BooksController < ApplicationController
 		@book = Book.new
 
 		if params[:search] && params[:search_model] == "1"
-			@books = Book.where('title LIKE?',"%#{params[:search]}%")
+			@books = Book.search(params[:search], params[:search_way])
 		elsif params[:search] && params[:search_model] == "2"
-			@users = User.where('name LIKE?',"%#{params[:search]}%")
+			@users = User.search(params[:search], params[:search_way])
 			render template: "users/index"
 		else
 			@books = Book.all
