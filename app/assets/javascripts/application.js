@@ -45,8 +45,4 @@ $(document).ready(function() {
         hidePrevious : false
     });
 
-    $(document).on('ajax:success', 'form', function(e) {
-        $('textarea, #book_title').val('');
-        $('.book_index').prepend('<p>' + e.detail[0].title + e.detail[0].body + '</p>');
-    })
 });

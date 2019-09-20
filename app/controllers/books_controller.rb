@@ -13,10 +13,18 @@ class BooksController < ApplicationController
 			@books = Book.all
 		end
 
-		if params[:search]
+		if params[:search] && params[:order] == nil
 			@history = current_user.search_histories.new
 			@history.history = params[:search]
 			@history.save!
+		end
+
+		if params[:order] && params[:order] == "1"
+			@books_sort = @books.order("id")
+			render :sort
+		elsif params[:order] && params[:order] == "2"
+			@books_sort = @books.order("title")
+			render :sort
 		end
 	end
 
@@ -24,14 +32,10 @@ class BooksController < ApplicationController
 		@books = Book.all
 		@book = Book.new(book_params)
 		@book.user_id = current_user.id
-		respond_to do |format|
 		if @book.save
-			flash[:notice] = "Book was successfully added"
-			format.json {render :json => @book}
-			format.html {redirect_to book_path(@book.id)}
+			redirect_to book_path(@book.id)
 		else
-			format.html {redirect_to books_path}
-		end
+			render :new
 		end
 	end
 

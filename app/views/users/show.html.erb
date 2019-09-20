@@ -86,9 +86,9 @@
 	<h2>検索履歴</h2>
 	<%= form_tag(users_history_path, method: :get, remote: true) do %>
 	<%= select_tag 'order', options_for_select({日時で並び替え: 1, 五十音で並び替え: 2}) %>
-	<%= submit_tag '並び替え', id: "search_order" %>
+	<%= submit_tag '並び替え' %>
 	<% end %>
-	<div id="search">
+	<div id="search_history">
 		<%= render 'recently_search', search_histories: @search_histories %>
 	</div>
 </div>
