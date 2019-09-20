@@ -12,6 +12,12 @@ class BooksController < ApplicationController
 		else
 			@books = Book.all
 		end
+
+		if params[:search]
+			@history = current_user.search_histories.new
+			@history.history = params[:search]
+			@history.save!
+		end
 	end
 
 	def create
@@ -59,7 +65,6 @@ class BooksController < ApplicationController
 	end
 
 	private
-
 	def book_params
 		params.require(:book).permit(:title, :body)
 	end

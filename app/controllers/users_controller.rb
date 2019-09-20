@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	@book = Book.new
   	@books = @user.books
+    @search_histories = @user.search_histories.all
 
     @follows = @user.followings
     @followers = @user.followers
@@ -42,6 +43,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @followers = @user.followers
   end
+
+  def history
+    @user = current_user
+    if params[:order] == "1"
+      @search_histories = @user.search_histories.order("id")
+    elsif params[:order] == "2"
+      @search_histories = @user.search_histories.order('history')
+    end
+    render :history
+  end
+
+
 
   private
 	def user_params

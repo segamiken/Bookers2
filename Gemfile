@@ -81,3 +81,5 @@ gem 'font-awesome-rails'
 
 gem 'hirb'
 gem 'hirb-unicode'
+
+gem 'js_cookie_rails', '~> 2.2'

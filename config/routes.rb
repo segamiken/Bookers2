@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'top#index' #top page
   get '/home/about' => 'top#about'
+  get '/users/history' => 'users#history'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users, only:[:show, :index, :edit, :update] do
   	resource :relationships, only: [:create, :destroy]

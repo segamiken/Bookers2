@@ -1,0 +1,13 @@
+
+<table class="table">
+<% search_histories.each do |s| %>
+	<tbody>
+		<tr>
+			<td><%= s.created_at %></td>
+			<td><%= s.history %></td>
+		</tr>
+	</tbody>
+<% end %>
+</table>
+
+
